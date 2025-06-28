@@ -7,6 +7,8 @@
                     :color="'#64e9ff'"
                     :size="300"
                 />
+
+
             </div>
         </template>
         <TxInputs fixed-aspect-ratio v-if="state.mapAvailable && state.showMap && state.showRadio"></TxInputs>
@@ -16,12 +18,18 @@
         <AttitudeViewer @close="state.showAttitude = false" v-if="state.showAttitude"></AttitudeViewer>
         <MagFitTool     @close="state.showMagfit = false" v-if="state.showMagfit"></MagFitTool>
         <EkfHelperTool  @close="state.showEkfHelper = false" v-if="state.showEkfHelper"></EkfHelperTool>
+        <!-- floating chatbot – shows only after a file has been uploaded -->
+            <div class="chat-widget-container">
+                <ChatWidget
+                v-if="state.currentFileId"
+                :key="state.currentFileId"          
+                :file-id="state.currentFileId"/>
+            </div>
         <div class="container-fluid" style="height: 100%; overflow: hidden;">
 
             <sidebar/>
 
             <main class="col-md-9 ml-sm-auto col-lg-10 flex-column d-sm-flex" role="main">
-
                 <div class="row"
                      v-bind:class="[state.showMap ? 'h-50' : 'h-100']"
                      v-if="state.plotOn">
@@ -61,6 +69,7 @@ import { DjiDataExtractor } from '../tools/djiDataExtractor'
 import MagFitTool from '@/components/widgets/MagFitTool.vue'
 import EkfHelperTool from '@/components/widgets/EkfHelperTool.vue'
 import Vue from 'vue'
+import ChatWidget from './ChatWidget.vue'
 
 export default {
     name: 'Home',
@@ -239,7 +248,8 @@ export default {
         DeviceIDViewer,
         AttitudeViewer,
         MagFitTool,
-        EkfHelperTool
+        EkfHelperTool,
+        ChatWidget
     },
     computed: {
         mapOk () {
@@ -325,6 +335,12 @@ export default {
       div .atom-spinner {
         margin: auto;
         margin-top: 15%;
+    }
+    .chat-widget-container {
+        position: fixed;
+        bottom: 40px;
+        right: 20px;
+        z-index: 2000;
     }
 
 </style>

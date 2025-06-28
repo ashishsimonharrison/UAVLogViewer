@@ -3,6 +3,7 @@ import '../mavextra/mymavextra'
 
 export const store = {
     // currentTrajectory: [],
+    currentFileId: null, // used to track the current file being processed
     trajectorySource: '',
     trajectories: {},
     timeTrajectory: {},

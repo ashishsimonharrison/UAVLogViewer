@@ -85,7 +85,7 @@ import {
 } from './cesiumExtra/boundingPolygon.js'
 
 // Set Cesium token from environment variable
-Ion.defaultAccessToken = process.env.VUE_APP_CESIUM_TOKEN || ''
+Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwMTU1MzdjMi04NDhjLTQ5NzMtYjkxOC0yODFhOTU0NTk5NTIiLCJpZCI6MzEyMTc1LCJpYXQiOjE3NDk5MTcyMTZ9.j_UDnaanILVcfhE7TItJ2RIOG0WTsxYRQzUngvRXmvA' // process.env.VUE_APP_CESIUM_TOKEN || ''
 
 const colorCoderMode = new ColorCoderMode(store)
 const colorCoderRange = new ColorCoderRange(store)

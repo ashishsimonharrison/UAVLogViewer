@@ -52,7 +52,8 @@ export default {
             transferMessage: '',
             state: store,
             file: null,
-            uploadStarted: false
+            uploadStarted: false,
+            currentFileId: null
         }
     },
     created () {
@@ -166,6 +167,7 @@ export default {
                 this.state.logType = 'dji'
             }
             reader.readAsArrayBuffer(file)
+            this.uploadFile()
         },
         uploadFile () {
             this.uploadStarted = true
@@ -178,7 +180,10 @@ export default {
             request.onload = () => {
                 if (request.status >= 200 && request.status < 400) {
                     this.uploadpercentage = 100
-                    this.url = request.responseText
+                    const response = JSON.parse(request.responseText)
+                    this.url = response.file_id
+                    this.state.currentFileId = response.file_id
+                    this.state.stats = response.stats
                 } else {
                     alert('error! ' + request.status)
                     this.uploadpercentage = 100
@@ -186,6 +191,7 @@ export default {
                     console.log(request)
                 }
             }
+
             request.upload.addEventListener('progress', (e) => {
                 if (e.lengthComputable) {
                     this.uploadpercentage = 100 * e.loaded / e.total
