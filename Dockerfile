@@ -12,9 +12,6 @@ RUN useradd -m -u 2000 nodeuser
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install Python requirements file
-RUN pip install -r ./backend/requirements.txt
-
 # Install dependencies
 RUN npm install
 
