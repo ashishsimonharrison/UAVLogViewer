@@ -1,3 +1,6 @@
 [submodule "src/tools/parsers/JsDataflashParser"]
 	path = src/tools/parsers/JsDataflashParser
 	url = https://github.com/Williangalvani/JsDataflashParser.git
+[submodule "backend/mavlink"]
+    path = backend/mavlink
+    url = https://github.com/ArduPilot/mavlink.git
