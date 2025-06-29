@@ -12,22 +12,22 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             "/upload/*":{
-                target:"http://localhost:8081",
+                target:"http://backend:8081",
                 secure:"false",
                 timeout: 600000,
                 proxyTimeout: 600000,
             },
             "/eniro/*":{
-                target:"http://localhost:8081",
+                target:"http://backend:8081",
                 secure:"false"
             },
             "/uploaded/*":{
-                target:"http://localhost:8081",
+                target:"http://backend:8081",
                 secure:"false"
             },
 
             "/chat/*":{                     // chat api
-                target:"http://localhost:8081",   // backend host:port
+                target:"http://backend:8081",   // backend host:port
                 secure:"false"
             },
             
