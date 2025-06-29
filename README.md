@@ -1,53 +1,58 @@
-# UAV Log Viewer
+# UAV Log Viewer
 
-![log seeking](preview.gif "Logo Title Text 1")
+An interactive web application for visualising ArduPilot **MAVLink** and **DataFlash** logs.
 
- This is a Javascript based log viewer for Mavlink telemetry and dataflash logs.
- [Live demo here](http://plot.ardupilot.org).
+---
 
-## Build Setup
+## 🔑 Environment variables
 
-``` bash
-# install dependencies
-npm install
+Create a `.env` file in the project root and provide **either** an OpenAI or a Mistral API key, plus your Cesium ion access token:
 
-# serve with hot reload at localhost:8080
-npm run dev
+```env
+# choose **one** of the AI providers
+OPENAI_API_KEY=your_openai_key_here
+# or
+MISTRAL_API_KEY=your_mistral_key_here
 
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+# Cesium ion token for 3‑D globe and terrain tiles
+VUE_APP_CESIUM_TOKEN=your_cesium_token_here
 ```
 
-# Docker
+## 📦 Quick Start (Docker Compose)
 
-run the prebuilt docker image:
+> These steps assume Docker ≥ 20.10 and Docker Compose v2 are installed.
 
-``` bash
-docker run -p 8080:8080 -d ghcr.io/ardupilot/uavlogviewer:latest
+```bash
+# 1 ‒ Clone the repository (main branch)
+git clone --branch main https://github.com/ashishsimonharrison/UAVLogViewer.git
 
+# 2 ‒ Move into the project root
+cd UAVLogViewer
+
+# 3 ‒ Build the backend and frontend images
+docker-compose build
+
+# 4 ‒ Start the stack (Ctrl‑C to stop)
+docker-compose up
 ```
 
-or build the docker file locally:
+Once both containers report **“Up”** you can open:
 
-``` bash
+* **Frontend** → [http://localhost:8080](http://localhost:8080)
 
-# Build Docker Image
-docker build -t <your username>/uavlogviewer .
+The frontend proxies its API calls to the backend automatically when running through Docker.
 
-# Run Docker Image
-docker run -e VUE_APP_CESIUM_TOKEN=<Your cesium ion token> -it -p 8080:8080 -v ${PWD}:/usr/src/app <your username>/uavlogviewer
+---
 
-# Navigate to localhost:8080 in your web browser
-
-# changes should automatically be applied to the viewer
+## 🗺️ Project Structure (excerpt)
 
 ```
+UAVLogViewer/
+├── backend/        # FastAPI server (log parsing & upload endpoints)
+├── docker-compose.yml
+└── README.md
+```
+
+## 📜 License
+
+This project is licensed under the terms of the original UAV Log Viewer upstream licence.
